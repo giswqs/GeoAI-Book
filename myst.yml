@@ -1,0 +1,62 @@
+version: 1
+project:
+  title: GeoAI with Python
+  authors:
+    - name: Qiusheng Wu
+  copyright: '2026'
+  exclude:
+    - _build
+    - Thumbs.db
+    - .DS_Store
+    - '**.ipynb_checkpoints'
+  github: giswqs/GeoAI-Book
+  thebe:
+    binder:
+      repo: giswqs/GeoAI-Book
+      provider: github
+      url: https://mybinder.org
+      ref: main
+  bibliography:
+    - book/references.bib
+  toc:
+    - file: index.md
+    - title: Preface
+      children:
+        - file: book/preface.md
+    - title: Foundations
+      children:
+        - file: book/foundations/introduction.md
+        - file: book/foundations/setup.md
+        - file: book/foundations/data-formats.md
+    - title: Data Acquisition and Preparation
+      children:
+        - file: book/data/download-data.md
+        - file: book/data/visualization.md
+        - file: book/data/training-data.md
+    - title: Core AI Tasks
+      children:
+        - file: book/core_tasks/image-recognition.md
+        - file: book/core_tasks/object-detection.md
+        - file: book/core_tasks/semantic-segmentation.md
+        - file: book/core_tasks/instance-segmentation.md
+        - file: book/core_tasks/image-translation.md
+        - file: book/core_tasks/change-detection.md
+        - file: book/core_tasks/pixel-regression.md
+    - title: Foundation Models and Satellite Embeddings
+      children:
+        - file: book/advanced/sam-geospatial.md
+        - file: book/advanced/vision-language-models.md
+        - file: book/advanced/foundation-models.md
+        - file: book/advanced/ai-agents.md
+    - title: QGIS Plugins
+      children:
+        - file: book/qgis/installation.md
+        - file: book/qgis/samgeo-plugin.md
+        - file: book/qgis/segmentation-plugin.md
+        - file: book/qgis/vlm-plugin.md
+site:
+  options:
+    logo: logo.png
+    favicon: fav.ico
+    folders: true
+  template: book-theme
