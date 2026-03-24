@@ -18,42 +18,6 @@ kernelspec:
 
 ## Plugin Architecture Overview
 
-## Installing Pixi
-
-### Linux and macOS
-
-```bash
-curl -fsSL https://pixi.sh/install.sh | sh
-```
-
-### Windows
-
-### Verifying the Installation
-
-```bash
-pixi --version
-```
-
-## Creating the Python Environment
-
-### GPU with CUDA 12.x
-
-### GPU with CUDA 13.x
-
-### CPU Only
-
-### Installing the Environment
-
-```bash
-pixi install
-```
-
-### Verifying PyTorch and CUDA
-
-```bash
-pixi run python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
-```
-
 ## Installing the QGIS Plugin
 
 ### Prerequisites
@@ -64,22 +28,92 @@ pixi run python -c "import torch; print(torch.__version__); print(torch.cuda.is_
 
 ```bash
 git clone https://github.com/opengeos/geoai.git
-cd geoai
+cd geoai/qgis_plugin
 python install.py
+```
+
+```bash
+python install.py --remove
 ```
 
 ### Option C: Manual Installation
 
 ### Enabling the Plugin
 
-## Setting Up SAM 3 Access
+## Setting Up Dependencies
 
-### Requesting Access on HuggingFace
-
-### Authenticating with the HuggingFace CLI
+### Option A: Built-in Dependency Installer (Recommended)
 
 ```bash
-pixi run huggingface-cli login
+# Linux/macOS
+export GEOAI_CACHE_DIR=/path/to/writable/directory
+
+# Windows (Command Prompt)
+set GEOAI_CACHE_DIR=D:\geoai_cache
+
+# Windows (PowerShell)
+$env:GEOAI_CACHE_DIR = "D:\geoai_cache"
+```
+
+### Option B: Pixi Environment (Advanced)
+
+#### Installing Pixi
+
+```bash
+curl -fsSL https://pixi.sh/install.sh | sh
+```
+
+```bash
+pixi --version
+```
+
+#### Creating the Python Environment
+
+```bash
+pixi init geo
+cd geo
+```
+
+#### Installing the Environment
+
+```bash
+pixi install
+```
+
+#### Verifying PyTorch and CUDA
+
+```bash
+pixi run python -c "import torch; print('PyTorch:', torch.__version__); print('CUDA available:', torch.cuda.is_available()); print('GPU:', (torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'None'))"
+```
+
+#### Installing DeepForest
+
+```bash
+pixi run pip install deepforest
+```
+
+```bash
+pixi run pip install -U numpy transformers
+```
+
+#### Launching QGIS from Pixi
+
+```bash
+pixi run qgis
+```
+
+## Setting Up SAM 3 Access
+
+### Requesting Access on Hugging Face
+
+### Authenticating and Downloading the Model
+
+```bash
+pixi run hf auth login
+```
+
+```bash
+pixi run hf download facebook/sam3
 ```
 
 ## GPU Memory Management
@@ -98,10 +132,12 @@ watch -n 1 nvidia-smi
 
 ## Checking for Plugin Updates
 
-```bash
-pixi update
-```
-
 ## Key Takeaways
 
 ## Exercises
+
+### Exercise 1: Install and Verify the Plugin
+
+### Exercise 2: Built-in Dependency Installer and Environment Verification
+
+### Exercise 3: GPU Memory Management and Plugin Maintenance

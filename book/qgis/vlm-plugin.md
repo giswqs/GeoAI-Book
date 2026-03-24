@@ -26,14 +26,6 @@ kernelspec:
 
 ## Point Localization
 
-## Practical Workflows
-
-### Rapid Damage Assessment
-
-### Land Use Inventory
-
-### Vehicle Counting
-
 ## Tips and Limitations
 
 ## Key Takeaways
@@ -47,5 +39,3 @@ kernelspec:
 ### Exercise 3: Object Detection and Counting
 
 ### Exercise 4: Comparing Detection and Point Modes
-
-### Exercise 5: Multi-Mode Damage Assessment Workflow

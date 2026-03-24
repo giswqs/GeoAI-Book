@@ -4,9 +4,9 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.17.3
+    jupytext_version: 1.18.1
 kernelspec:
-  display_name: Python 3
+  display_name: geo
   language: python
   name: python3
 ---
@@ -26,22 +26,21 @@ kernelspec:
 
 ### Image Differencing
 
-```{code-cell} python
+```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 import rasterio
 import geoai
 
 # Download Landsat imagery for two dates
-url_2023 = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/knoxville_landsat_2023.tif"
-url_2024 = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/knoxville_landsat_2024.tif"
+url_2023 = "https://data.source.coop/opengeos/geoai/knoxville_landsat_2023.tif"
+url_2024 = "https://data.source.coop/opengeos/geoai/knoxville_landsat_2024.tif"
 path_2023 = geoai.download_file(url_2023)
 path_2024 = geoai.download_file(url_2024)
 
 # Read the NIR band (Band 5 in Landsat 8/9) from both dates
 with rasterio.open(path_2023) as src:
     nir_2023 = src.read(5).astype(np.float32)
-    profile = src.profile
 
 with rasterio.open(path_2024) as src:
     nir_2024 = src.read(5).astype(np.float32)
@@ -58,13 +57,13 @@ print(f"Threshold: {threshold:.2f}")
 print(f"Changed pixels: {change_mask.sum():,} ({100 * change_mask.mean():.1f}%)")
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 axes[0].imshow(diff, cmap="RdBu", vmin=-threshold * 2, vmax=threshold * 2)
 axes[0].set_title("NIR Difference (2024 - 2023)")
 axes[0].axis("off")
 axes[1].hist(diff.ravel(), bins=100, color="steelblue", edgecolor="none")
-axes[1].axvline(-threshold, color="red", linestyle="--", label=f"Threshold (±{threshold:.0f})")
+axes[1].axvline(-threshold, color="red", linestyle="--", label=f"Threshold (±{threshold:.2f})")
 axes[1].axvline(threshold, color="red", linestyle="--")
 axes[1].set_title("Difference Histogram")
 axes[1].legend()
@@ -77,7 +76,7 @@ plt.show()
 
 ### Change Vector Analysis
 
-```{code-cell} python
+```{code-cell} ipython3
 # Read Red and NIR bands from both dates
 with rasterio.open(path_2023) as src:
     red_2023 = src.read(4).astype(np.float32)
@@ -98,157 +97,215 @@ print(f"95th percentile threshold: {mag_threshold:.2f}")
 print(f"Significant change pixels: {significant_change.sum():,}")
 ```
 
-### Principal Component Analysis
-
-```{code-cell} python
-from sklearn.decomposition import PCA
-
-# Stack bands from both dates into a single array
-# Using Red and NIR from each date as a simple example
-stack = np.stack([red_2023.ravel(), nir_2023.ravel(),
-                  red_2024.ravel(), nir_2024.ravel()], axis=1)
-
-# Handle any NaN or infinite values
-valid_mask = np.all(np.isfinite(stack), axis=1)
-stack_clean = stack[valid_mask]
-
-# Apply PCA
-pca = PCA(n_components=4)
-pca_result = pca.fit_transform(stack_clean)
-
-print("Explained variance ratios:", [f"{v:.3f}" for v in pca.explained_variance_ratio_])
-
-# The last component often highlights change areas
-change_component = np.full(red_2023.size, np.nan)
-change_component[valid_mask] = pca_result[:, -1]
-change_component = change_component.reshape(red_2023.shape)
-```
-
 ## Deep Learning for Change Detection
 
 ### Siamese Networks
 
-### Architectures
+### ChangeStar
 
-### Using torchange Library
+## Import Libraries
 
-## Preparing Bi-Temporal Data
-
-### Co-registration Requirements
-
-### Creating Image Pairs
-
-```{code-cell} python
-# Download a bi-temporal NAIP image pair for Las Vegas
-url_2019 = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/las_vegas_naip_2019_a.tif"
-url_2022 = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/las_vegas_naip_2022_a.tif"
-path_2019 = geoai.download_file(url_2019)
-path_2022 = geoai.download_file(url_2022)
-
-# Inspect the image pair
-with rasterio.open(path_2019) as src:
-    print(f"2019 image: {src.width}x{src.height}, {src.count} bands, CRS: {src.crs}")
-    print(f"  Bounds: {src.bounds}")
-
-with rasterio.open(path_2022) as src:
-    print(f"2022 image: {src.width}x{src.height}, {src.count} bands, CRS: {src.crs}")
-    print(f"  Bounds: {src.bounds}")
-```
-
-### Change Labels
-
-## Training a Change Detection Model
-
-### Model Configuration
-
-### Training with Paired Images
-
-## Evaluating Change Detection
-
-### Metrics
-
-### False Alarm Analysis
-
-## Applications
-
-### Urban Expansion Monitoring
-
-```{code-cell} python
-# Run deep learning-based change detection on the Las Vegas NAIP pair
-# using the image_segmentation function with a bi-temporal approach
+```{code-cell} ipython3
+import os
 import numpy as np
+import matplotlib.pyplot as plt
+from pathlib import Path
 
-with rasterio.open(path_2019) as src1:
-    img1 = src1.read([1, 2, 3]).astype(np.float32) / 255.0
-
-with rasterio.open(path_2022) as src2:
-    img2 = src2.read([1, 2, 3]).astype(np.float32) / 255.0
-
-# Compute per-band absolute difference as a simple deep feature proxy
-diff = np.abs(img2 - img1)
-magnitude = np.sqrt(np.sum(diff**2, axis=0))
-
-# Threshold to identify changed pixels
-threshold = np.percentile(magnitude, 95)
-change_mask = (magnitude > threshold).astype(np.uint8)
-print(f"Changed pixels: {change_mask.sum():,} ({change_mask.mean()*100:.1f}%)")
+import geoai
+from geoai.change_detection import (
+    ChangeStarDetection,
+    changestar_detect,
+    list_changestar_models,
+)
 ```
 
-```{code-cell} python
-# Visualize the change detection results
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+## List Available Models
 
-axes[0].imshow(np.transpose(img1, (1, 2, 0)))
-axes[0].set_title("2019 NAIP")
+```{code-cell} ipython3
+models = list_changestar_models()
+for short_name, full_name in models.items():
+    print(f"{short_name:30s} -> {full_name}")
+```
+
+## Setup
+
+```{code-cell} ipython3
+device = geoai.get_device()
+print(f"Using device: {device}")
+
+out_folder = "changestar_results"
+Path(out_folder).mkdir(exist_ok=True)
+print(f"Output directory: {out_folder}")
+```
+
+## Download Sample Data
+
+```{code-cell} ipython3
+naip_2019_url = "https://data.source.coop/opengeos/geoai/las_vegas_naip_2019_a.tif"
+naip_2022_url = "https://data.source.coop/opengeos/geoai/las_vegas_naip_2022_a.tif"
+
+naip_2019_path = geoai.download_file(naip_2019_url)
+naip_2022_path = geoai.download_file(naip_2022_url)
+
+print(f"Downloaded 2019 NAIP: {naip_2019_path}")
+print(f"Downloaded 2022 NAIP: {naip_2022_path}")
+```
+
+## Visualize Input Imagery
+
+```{code-cell} ipython3
+geoai.create_split_map(
+    left_layer=naip_2019_path,
+    right_layer=naip_2022_path,
+    left_label="NAIP 2019",
+    right_label="NAIP 2022",
+)
+```
+
+## Initialize the ChangeStar Model
+
+```{code-cell} ipython3
+detector = ChangeStarDetection(model_name="s1_s1c1_vitb")
+```
+
+## Run Change Detection
+
+```{code-cell} ipython3
+result = detector.predict(
+    naip_2019_path,
+    naip_2022_path,
+    output_change=os.path.join(out_folder, "change_map.tif"),
+    output_t1_semantic=os.path.join(out_folder, "t1_buildings.tif"),
+    output_t2_semantic=os.path.join(out_folder, "t2_buildings.tif"),
+    output_vector=os.path.join(out_folder, "changes.gpkg"),
+)
+```
+
+```{code-cell} ipython3
+print("Result keys:", list(result.keys()))
+for key, value in result.items():
+    if hasattr(value, "shape"):
+        print(f"  {key}: shape={value.shape}, dtype={value.dtype}")
+    else:
+        print(f"  {key}: {value}")
+```
+
+## Visualize Results
+
+```{code-cell} ipython3
+fig = detector.visualize(
+    naip_2019_path,
+    naip_2022_path,
+    result=result,
+    figsize=(25, 10),
+    title1="NAIP 2019",
+    title2="NAIP 2022",
+)
+plt.show()
+```
+
+### Overlay Visualization
+
+```{code-cell} ipython3
+fig = detector.visualize_overlay(
+    naip_2019_path,
+    naip_2022_path,
+    result=result,
+    figsize=(20, 6),
+    title1="NAIP 2019",
+    title2="NAIP 2022",
+)
+plt.show()
+```
+
+## Using the Convenience Function
+
+```{code-cell} ipython3
+result2 = changestar_detect(
+    naip_2019_path,
+    naip_2022_path,
+    model_name="s1_s1c1_vitb",
+    output_change=os.path.join(out_folder, "change_map_v2.tif"),
+)
+
+print(f"Change pixels: {result2['change_map'].sum():,}")
+print(
+    f"Changed area: {result2['change_map'].sum() / result2['change_map'].size * 100:.2f}%"
+)
+```
+
+## Comparing Model Variants
+
+```{code-cell} ipython3
+result_s1 = result
+
+detector_s9 = ChangeStarDetection(model_name="s9_s9c1_vitb")
+result_s9 = detector_s9.predict(naip_2019_path, naip_2022_path)
+```
+
+```{code-cell} ipython3
+fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+
+axes[0].imshow(result_s1["change_map"], cmap="gray")
+axes[0].set_title(f"S1 Model\n(Changed pixels: {result_s1['change_map'].sum():,})")
 axes[0].axis("off")
 
-axes[1].imshow(np.transpose(img2, (1, 2, 0)))
-axes[1].set_title("2022 NAIP")
+axes[1].imshow(result_s9["change_map"], cmap="gray")
+axes[1].set_title(f"S9 Model\n(Changed pixels: {result_s9['change_map'].sum():,})")
 axes[1].axis("off")
 
-axes[2].imshow(change_mask, cmap="Reds")
-axes[2].set_title("Detected Changes")
+combined = np.zeros((*result_s1["change_map"].shape, 3), dtype=np.uint8)
+combined[result_s1["change_map"] == 1, 0] = 255  # S1 in red
+combined[result_s9["change_map"] == 1, 2] = 255  # S9 in blue
+both = (result_s1["change_map"] == 1) & (result_s9["change_map"] == 1)
+combined[both] = [255, 0, 255]
+
+axes[2].imshow(combined)
+axes[2].set_title("Comparison\n(Red=S1 only, Blue=S9 only, Magenta=Both)")
 axes[2].axis("off")
 
 plt.tight_layout()
 plt.show()
 ```
 
-### Environmental Change
+## Adjusting the Threshold
 
-```{code-cell} python
-# Compute NDVI for both dates
-with rasterio.open(path_2023) as src:
-    red_23 = src.read(4).astype(np.float32)
-    nir_23 = src.read(5).astype(np.float32)
-with rasterio.open(path_2024) as src:
-    red_24 = src.read(4).astype(np.float32)
-    nir_24 = src.read(5).astype(np.float32)
+```{code-cell} ipython3
+thresholds = [0.3, 0.5, 0.7]
+fig, axes = plt.subplots(1, len(thresholds), figsize=(18, 6))
 
-ndvi_2023 = (nir_23 - red_23) / (nir_23 + red_23 + 1e-8)
-ndvi_2024 = (nir_24 - red_24) / (nir_24 + red_24 + 1e-8)
-ndvi_diff = ndvi_2024 - ndvi_2023
+for ax, thresh in zip(axes, thresholds):
+    result_t = detector.predict(naip_2019_path, naip_2022_path, threshold=thresh)
+    ax.imshow(result_t["change_map"], cmap="gray")
+    ax.set_title(
+        f"Threshold = {thresh}\n"
+        f"(Changed pixels: {result_t['change_map'].sum():,})"
+    )
+    ax.axis("off")
 
-veg_loss = ndvi_diff < -0.15
-veg_gain = ndvi_diff > 0.15
-
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-axes[0].imshow(ndvi_2023, cmap="RdYlGn", vmin=-0.2, vmax=0.8)
-axes[0].set_title("NDVI 2023")
-axes[0].axis("off")
-axes[1].imshow(ndvi_2024, cmap="RdYlGn", vmin=-0.2, vmax=0.8)
-axes[1].set_title("NDVI 2024")
-axes[1].axis("off")
-change_rgb = np.ones((*ndvi_diff.shape, 3)) * 0.8
-change_rgb[veg_loss] = [0.8, 0.2, 0.2]
-change_rgb[veg_gain] = [0.2, 0.7, 0.2]
-axes[2].imshow(change_rgb)
-axes[2].set_title("Vegetation Change (Red=Loss, Green=Gain)")
-axes[2].axis("off")
 plt.tight_layout()
 plt.show()
-print(f"Vegetation loss: {veg_loss.sum():,} pixels ({100 * veg_loss.mean():.1f}%)")
-print(f"Vegetation gain: {veg_gain.sum():,} pixels ({100 * veg_gain.mean():.1f}%)")
+```
+
+## View Saved Outputs
+
+```{code-cell} ipython3
+for f in sorted(os.listdir(out_folder)):
+    fpath = os.path.join(out_folder, f)
+    size_mb = os.path.getsize(fpath) / 1024 / 1024
+    print(f"{f:40s} {size_mb:.2f} MB")
+```
+
+```{code-cell} ipython3
+change_map_path = os.path.join(out_folder, "change_map.tif")
+geoai.view_raster(
+    change_map_path,
+    nodata=0,
+    cmap="Reds",
+    opacity=0.8,
+    basemap=naip_2019_path,
+    backend="ipyleaflet",
+)
 ```
 
 ## Key Takeaways
@@ -257,10 +314,30 @@ print(f"Vegetation gain: {veg_gain.sum():,} pixels ({100 * veg_gain.mean():.1f}%
 
 ### Exercise 1: Threshold Sensitivity Analysis
 
-### Exercise 2: Multi-Band Change Vector Analysis
+```{code-cell} ipython3
 
-### Exercise 3: NDVI Time Series Change Detection
+```
 
-### Exercise 4: Change Detection with Different Confidence Thresholds
+### Exercise 2: Comparing All Model Variants
 
-### Exercise 5: Combining Traditional and Deep Learning Approaches
+```{code-cell} ipython3
+
+```
+
+### Exercise 3: Traditional vs. Deep Learning Comparison
+
+```{code-cell} ipython3
+
+```
+
+### Exercise 4: Change Detection on a Different Image Pair
+
+```{code-cell} ipython3
+
+```
+
+### Exercise 5: Vector Output Analysis
+
+```{code-cell} ipython3
+
+```

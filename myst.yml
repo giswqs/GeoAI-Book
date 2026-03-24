@@ -47,13 +47,15 @@ project:
         - file: book/advanced/sam-geospatial.md
         - file: book/advanced/vision-language-models.md
         - file: book/advanced/foundation-models.md
-        - file: book/advanced/ai-agents.md
     - title: QGIS Plugins
       children:
         - file: book/qgis/installation.md
-        - file: book/qgis/samgeo-plugin.md
-        - file: book/qgis/segmentation-plugin.md
+        - file: book/qgis/tree-segmentation.md
+        - file: book/qgis/water-segmentation.md
         - file: book/qgis/vlm-plugin.md
+        - file: book/qgis/samgeo-plugin.md
+        - file: book/qgis/semantic-segmentation.md
+        - file: book/qgis/instance-segmentation.md
 site:
   options:
     logo: logo.png

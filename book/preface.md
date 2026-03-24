@@ -10,8 +10,7 @@ kernelspec:
   language: python
   name: python3
 title: Preface
-abstract: "This book is a hands-on guide to GeoAI - the intersection of geospatial science and artificial intelligence. It is designed for researchers, GIS professionals, and Python developers who want to apply deep learning and foundation models to geospatial data for tasks such as image segmentation, object detection, land cover classification, and change detection."
-acknowledgments: "Thank you to the open-source geospatial community, my students and colleagues at the University of Tennessee, and my family for their support and encouragement."
+abstract: "This book is a hands-on guide to GeoAI, the intersection of geospatial science and artificial intelligence. Through 23 chapters of executable Python examples, it takes readers from environment setup and geospatial data preparation through core deep learning tasks (image recognition, object detection, semantic segmentation, instance segmentation, image translation, change detection, and pixel-level regression) to cutting-edge foundation models including the Segment Anything Model (SAM), vision-language models, and satellite embeddings. A dedicated section on QGIS plugins shows how to run these AI workflows without writing code. Designed for GIS professionals, remote sensing scientists, and Python developers, the book uses only open-source tools and real-world satellite imagery throughout."
 authors:
   - name: Qiusheng Wu
     affiliations:
@@ -28,31 +27,31 @@ exports:
 
 ## Introduction
 
-We are witnessing a fundamental transformation in how we observe and understand our planet. Every day, Earth observation satellites capture petabytes of imagery - multispectral scenes from Sentinel-2, high-resolution photographs from commercial constellations, radar data that penetrates cloud cover, and LiDAR point clouds that map terrain in three dimensions. This torrent of geospatial data holds the answers to some of humanity's most pressing questions: How fast are our forests disappearing? Where are communities most vulnerable to flooding? How is urbanization reshaping our landscapes? Yet for decades, the gap between collecting this data and extracting actionable intelligence from it has remained stubbornly wide.
+We are in the midst of a revolution in Earth observation. Each day, satellites capture a massive volume of data, including multispectral images, radar, LiDAR, and more. While this information holds the keys to understanding climate vulnerability and urbanization, the gap between data collection and real-world application has remained a major hurdle.
 
-Enter GeoAI.
+This is where GeoAI comes in.
 
-GeoAI - the convergence of geospatial science and artificial intelligence - is closing that gap at remarkable speed. Deep learning models can now segment every building in a city from a single satellite image. Object detection algorithms identify individual trees, vehicles, and solar panels across vast landscapes. Foundation models like the Segment Anything Model (SAM) generalize to new geographies and sensor types with minimal training data. Vision-language models allow analysts to query satellite imagery using natural language, while AI agents can orchestrate entire geospatial workflows autonomously. What once required months of manual digitization can now be accomplished in minutes.
+As the intersection of geospatial science and AI, GeoAI is closing this gap at an incredible pace. Deep learning models can now identify every building at scale or pinpoint individual vehicles across vast areas. New foundation models allow these tools to work in unfamiliar environments with minimal human input. Furthermore, vision-language models and autonomous agents are enabling analysts to query imagery and manage workflows using simple commands. The manual digitization tasks that once took months are now being completed in a matter of minutes.
 
-This book, "_**GeoAI with Python: A Hands-On Guide to Geospatial AI**_," is your practical guide to this revolution. It is built on a simple premise: the best way to learn GeoAI is by doing it. Rather than dwelling on abstract theory, every chapter puts real tools in your hands - from preparing training datasets and running deep learning models to deploying interactive web applications that showcase your results. The code is real, the datasets are real, and the problems mirror what practitioners encounter every day.
+This book, "_**GeoAI with Python: A Practical Guide to Open-Source Geospatial AI**_," is your practical guide to this revolution. It is built on a simple premise: the best way to learn GeoAI is by doing it. Rather than dwelling on abstract theory, every chapter puts real tools in your hands, from preparing training datasets and running deep learning models to visualizing and interpreting your results interactively. The code is real, the datasets are real, and the problems mirror what practitioners encounter every day.
 
 The Python ecosystem for GeoAI has matured dramatically. Libraries like PyTorch, torchgeo, and segment-geospatial bring state-of-the-art deep learning to geospatial practitioners, while packages such as [leafmap](https://leafmap.org) and [geoai](https://opengeoai.org) provide high-level interfaces that make complex workflows accessible. Cloud computing platforms and GPU acceleration have lowered the barrier to training and deploying models at scale. Together, these advances mean that a researcher with a laptop can now accomplish what once required a team of specialists and a room full of servers.
 
-Our journey begins with the foundations - understanding geospatial data formats, setting up a deep learning environment, and mastering interactive visualization. From there, we progress through the core AI tasks that define modern remote sensing: semantic segmentation, object detection, instance segmentation, land cover classification, change detection, and pixel regression. We then explore the frontier of foundation models - SAM, vision-language models, and AI agents - before tackling the practical challenges of scaling inference, post-processing results, and building production applications.
+Our journey begins with the foundations: understanding geospatial data formats, setting up a deep learning environment, and mastering interactive visualization. We then cover the essential work of acquiring satellite imagery and preparing training datasets. From there, we progress through the core AI tasks that define modern remote sensing: image recognition, object detection, semantic segmentation, instance segmentation, image translation, change detection, and pixel-level regression. We then explore the frontier of foundation models, including the Segment Anything Model (SAM), vision-language models, and satellite embeddings. Finally, a dedicated section on QGIS plugins brings these AI capabilities into a familiar desktop GIS environment, enabling sophisticated workflows without writing code.
 
 Whether you are a GIS professional seeking to integrate AI into your workflows, a data scientist curious about geospatial applications, a researcher pushing the boundaries of Earth observation, or a student embarking on a career at the intersection of geography and machine learning, this book will equip you with the knowledge and skills to turn satellite imagery into insight.
 
-The future of geospatial analysis is intelligent, automated, and accessible. Let's build it together.
+The future of geospatial analysis is intelligent, automated, and accessible. Let us build it together.
 
 ## Who This Book Is For
 
-This book is designed for anyone who wants to apply artificial intelligence to geospatial data. If you've ever stared at a satellite image wondering how to extract buildings, roads, or land cover automatically - or if you've trained deep learning models but struggled to apply them to geographic data with projections, coordinates, and massive file sizes - this book is for you.
+This book is designed for anyone who wants to apply artificial intelligence to geospatial data. If you've ever stared at a satellite image wondering how to extract buildings, roads, or land cover automatically, or if you've trained deep learning models but struggled to apply them to geographic data with projections, coordinates, and massive file sizes, this book is for you.
 
 ### You'll Find the Most Value If You Are
 
-**A GIS Professional** ready to move beyond manual digitization and visual interpretation. You're proficient with QGIS or ArcGIS and understand spatial analysis concepts, but you want to harness deep learning to automate feature extraction, classify land cover at scale, or detect changes across time series of imagery.
+**A GIS Professional** ready to move beyond manual digitization and visual interpretation. You're proficient with QGIS or ArcGIS and understand spatial analysis concepts, but you want to harness deep learning to automate feature extraction, classify land cover at scale, or detect changes across time-series imagery.
 
-**A Remote Sensing Scientist or Researcher** working with satellite or aerial imagery. You understand spectral bands, spatial resolution, and image preprocessing, but you need a practical bridge to modern AI techniques - from training segmentation models to applying foundation models like SAM to your study areas.
+**A Remote Sensing Scientist or Researcher** working with satellite or aerial imagery. You understand spectral bands, spatial resolution, and image preprocessing, but you need a practical bridge to modern AI techniques, from training segmentation models to applying foundation models like SAM to your study areas.
 
 **A Data Scientist or Machine Learning Engineer** with experience in deep learning who wants to apply your skills to geospatial problems. You're comfortable with PyTorch or TensorFlow and understand CNNs and transformers, but you need guidance on the unique challenges of geographic data: coordinate reference systems, tiling large rasters, handling multi-band imagery, and georeferencing model outputs.
 
@@ -80,7 +79,7 @@ You should be comfortable with:
 
 If you're new to geospatial Python programming, the following book provides an excellent introduction to both foundational GIS concepts and Python programming:
 
-Wu, Q. (2025). *Introduction to GIS Programming: A Practical Python Guide to Open Source Geospatial Tools*.  Independently published. ISBN 979-8286979455. Available at [amazon.com/dp/B0FFW34LL3](https://www.amazon.com/dp/B0FFW34LL3).
+Wu, Q. (2025). *Introduction to GIS Programming: A Practical Python Guide to Open Source Geospatial Tools*. Independently published. PDF edition ISBN 9798993859712; Print edition ISBN 979-8286979455. Available at [gispro.gishub.org](https://gispro.gishub.org).
 
 For those interested in spatial data management and SQL-based geospatial analytics, the companion book offers a comprehensive guide:
 
@@ -94,9 +93,9 @@ This book offers a structured journey from geospatial fundamentals to production
 
 Establish the essential knowledge and tools that underpin all subsequent content:
 
-- **Chapter 1: Introduction to GeoAI** provides a comprehensive overview of the GeoAI landscape - what it is, why it matters, and how deep learning has transformed geospatial analysis. You'll explore the key AI tasks in remote sensing, survey the Python ecosystem for GeoAI, and understand where foundation models and AI agents are taking the field.
+- **Chapter 1: Introduction to GeoAI** provides a comprehensive overview of the GeoAI landscape: what it is, why it matters, and how deep learning has transformed geospatial analysis. You'll explore the key AI tasks in remote sensing, survey the Python ecosystem for GeoAI, and understand where foundation models and AI agents are taking the field.
 - **Chapter 2: Environment Setup** walks you through configuring a complete GeoAI development environment. From installing Python and managing packages with conda to setting up GPU acceleration with CUDA and PyTorch, this chapter ensures you have a solid, reproducible foundation for all the hands-on work that follows.
-- **Chapter 3: Geospatial Data Formats** covers the data formats you'll encounter throughout the book - raster formats like GeoTIFF and Cloud Optimized GeoTIFF (COG), vector formats like GeoJSON and GeoParquet, and specialized formats for deep learning such as COCO and Pascal VOC annotations. You'll learn to read, write, and convert between formats using Python.
+- **Chapter 3: Geospatial Data Formats** covers the data formats you'll encounter throughout the book, including raster formats like GeoTIFF and Cloud Optimized GeoTIFF (COG), vector formats like GeoJSON and GeoParquet, and specialized formats for deep learning such as COCO and Pascal VOC annotations. You'll learn to read, write, and convert between formats using Python.
 
 _By the end of Part I_, you'll have a fully configured deep learning environment and a solid understanding of the data formats and concepts needed to work with GeoAI.
 
@@ -104,44 +103,47 @@ _By the end of Part I_, you'll have a fully configured deep learning environment
 
 Master the critical but often underappreciated work of obtaining and preparing geospatial data for AI:
 
-- **Chapter 4: Downloading Geospatial Data** teaches you how to programmatically access satellite imagery, elevation data, and other geospatial datasets from sources like Google Earth Engine, Microsoft Planetary Computer, and various open data portals. You'll learn to search, filter, and download data for your study areas efficiently.
-- **Chapter 5: Interactive Visualization** introduces powerful visualization tools for exploring geospatial data interactively. Using leafmap and other libraries, you'll create interactive maps, overlay satellite imagery, visualize model predictions, and build compelling visual narratives - skills essential for both exploratory analysis and communicating results.
-- **Chapter 6: Creating Training Data** addresses one of the most important steps in any AI pipeline: preparing high-quality training datasets. You'll learn to create labeled datasets for segmentation, detection, and classification tasks - including annotation strategies, data augmentation techniques, and how to tile large satellite images into training chips.
+- **Chapter 4: Downloading Remote Sensing Data** teaches you how to programmatically access satellite imagery, elevation data, and other geospatial datasets from sources like Google Earth Engine, Microsoft Planetary Computer, and various open data portals. You'll learn to search, filter, and download data for your study areas efficiently.
+- **Chapter 5: Interactive Mapping & Visualization** introduces powerful visualization tools for exploring geospatial data interactively. Using leafmap and other libraries, you'll create interactive maps, overlay satellite imagery, visualize model predictions, and build compelling visual narratives. These skills are essential for both exploratory analysis and communicating results.
+- **Chapter 6: Creating Training Data** addresses one of the most important steps in any AI pipeline: preparing high-quality training datasets. You'll learn to create labeled datasets for segmentation, detection, and classification tasks, including annotation strategies and how to tile large satellite images into training chips.
 
 _By the end of Part II_, you'll be able to acquire satellite imagery from multiple sources, visualize it interactively, and prepare well-structured training datasets ready for deep learning models.
 
-### Part III: Core AI Tasks _(Chapters 7–12)_
+### Part III: Core AI Tasks _(Chapters 7–13)_
 
 Dive into the fundamental AI tasks that define modern geospatial analysis:
 
-- **Chapter 7: Image Segmentation** covers semantic segmentation - assigning a class label to every pixel in an image. You'll train models to delineate features like water bodies, vegetation, and built-up areas from satellite imagery, learning architectures like U-Net and DeepLabV3+ along the way.
+- **Chapter 7: Image Recognition** introduces deep learning for classifying entire images. You'll learn to build image classification models that identify scene types, land use categories, and geographic features from satellite and aerial imagery.
 - **Chapter 8: Object Detection** teaches you to locate and classify individual objects in geospatial imagery. From detecting buildings and vehicles to identifying trees and solar panels, you'll work with architectures like Faster R-CNN and YOLO adapted for remote sensing.
-- **Chapter 9: Instance Segmentation** combines detection and segmentation, producing precise boundaries for each individual object. You'll learn to distinguish overlapping features - such as individual building footprints in dense urban areas - using models like Mask R-CNN.
-- **Chapter 10: Land Cover Classification** applies AI to one of remote sensing's most fundamental tasks: mapping land cover and land use across large areas. You'll train classifiers on multispectral satellite imagery and learn to produce accurate, wall-to-wall land cover maps.
-- **Chapter 11: Change Detection** tackles the challenge of identifying what has changed between images captured at different times. From urban expansion and deforestation to post-disaster damage assessment, you'll learn both traditional and deep learning approaches to temporal analysis.
-- **Chapter 12: Pixel Regression** extends beyond classification to predict continuous values for each pixel - such as canopy height, biomass, soil moisture, or population density. You'll train regression models on satellite imagery and learn evaluation strategies specific to continuous predictions.
+- **Chapter 9: Semantic Segmentation** covers pixel-level classification, assigning a class label to every pixel in an image. You'll train models to delineate features like water bodies, vegetation, and built-up areas from satellite imagery, learning architectures like U-Net and DeepLabV3+ along the way.
+- **Chapter 10: Instance Segmentation** combines detection and segmentation, producing precise boundaries for each individual object. You'll learn to distinguish overlapping features, such as individual building footprints in dense urban areas, using models like Mask R-CNN.
+- **Chapter 11: Image Translation** applies AI to transform images between domains, including super-resolution, sensor translation, and cloud removal. You'll train models on multispectral satellite imagery and learn to generate higher-resolution outputs from lower-resolution inputs.
+- **Chapter 12: Change Detection** tackles the challenge of identifying what has changed between images captured at different times. From urban expansion and deforestation to post-disaster damage assessment, you'll learn both traditional and deep learning approaches to temporal analysis.
+- **Chapter 13: Pixel-Level Regression** extends beyond classification to predict continuous values for each pixel, such as canopy height, biomass, soil moisture, or population density. You'll train regression models on satellite imagery and learn evaluation strategies specific to continuous predictions.
 
 _By the end of Part III_, you'll have hands-on experience with all major GeoAI tasks, understand when to apply each approach, and be able to train and evaluate models for your own geospatial applications.
 
-### Part IV: Foundation Models and Satellite Embeddings _(Chapters 13–16)_
+### Part IV: Foundation Models and Satellite Embeddings _(Chapters 14–16)_
 
-Explore the cutting edge of GeoAI, where pre-trained foundation models and intelligent agents are redefining what's possible:
+Explore the cutting edge of GeoAI, where pre-trained foundation models are redefining what's possible:
 
-- **Chapter 13: SAM for Geospatial Data** introduces the Segment Anything Model (SAM) and its application to geospatial imagery. Using the [segment-geospatial](https://samgeo.gishub.org) package, you'll learn to segment satellite images with minimal prompts - extracting buildings, agricultural fields, water bodies, and more without task-specific training.
-- **Chapter 14: Vision-Language Models** explores models that bridge visual and textual understanding. You'll learn to query satellite imagery using natural language, generate captions for geospatial scenes, and leverage multimodal models for tasks like visual question answering on remote sensing data.
-- **Chapter 15: Satellite Embeddings** explores the rapidly growing ecosystem of pre-computed satellite embedding datasets from foundation models. You'll learn to browse, load, and visualize embeddings from nine datasets including Clay, TESSERA, and Google/AlphaEarth, perform similarity search and clustering, train lightweight classifiers on embedding vectors, and work with Prithvi and DINOv2 for generating new embeddings.
-- **Chapter 16: AI Agents for Geospatial Analysis** introduces the emerging paradigm of AI agents that can plan, reason, and execute multi-step geospatial workflows autonomously. You'll learn how large language models can be combined with geospatial tools to create intelligent assistants for spatial analysis.
+- **Chapter 14: Segment Anything for Geospatial** introduces the Segment Anything Model (SAM) and its application to geospatial imagery. Using the [segment-geospatial](https://samgeo.gishub.org) package, you'll learn to segment satellite images with minimal prompts, extracting buildings, agricultural fields, water bodies, and more without task-specific training.
+- **Chapter 15: Vision-Language Models** explores models that bridge visual and textual understanding. You'll learn to query satellite imagery using natural language, generate captions for geospatial scenes, and leverage multimodal models for tasks like visual question answering on remote sensing data.
+- **Chapter 16: Satellite Embeddings** explores the rapidly growing ecosystem of pre-computed satellite embedding datasets from foundation models. You'll learn to browse, load, and visualize embeddings from nine datasets including Clay, TESSERA, and Google's AlphaEarth, perform similarity search and clustering, and train lightweight classifiers on embedding vectors.
 
-_By the end of Part IV_, you'll understand how foundation models and AI agents are reshaping GeoAI, and you'll be equipped to apply these advanced techniques to your own research and projects.
+_By the end of Part IV_, you'll understand how foundation models are reshaping GeoAI, and you'll be equipped to apply these advanced techniques to your own research and projects.
 
-### Part V: QGIS Plugins _(Chapters 17–20)_
+### Part V: QGIS Plugins _(Chapters 17–23)_
 
 Bring GeoAI capabilities into the familiar QGIS desktop GIS environment through the GeoAI plugin:
 
-- **Chapter 17: Setting Up the GeoAI QGIS Plugin** walks through installing and configuring the GeoAI QGIS plugin. You'll set up a Pixi environment with PyTorch and CUDA support, install the plugin, and learn to manage GPU memory for running large AI models within QGIS.
-- **Chapter 18: Segment Anything in QGIS** demonstrates the SamGeo panel for interactive and automated segmentation. You'll load SAM models (SAM1, SAM2, SAM3), segment objects using text prompts, perform interactive segmentation with point and box prompts, process batches of features, and export georeferenced results.
-- **Chapter 19: Training and Inference in QGIS** covers the plugin panels for training and running deep learning models without writing code. You'll create training datasets, train segmentation models, run inference, detect trees and wildlife with DeepForest, and segment water bodies with OmniWaterMask.
-- **Chapter 20: Vision-Language Models in QGIS** demonstrates the Moondream panel for natural language interaction with geospatial imagery. You'll generate image captions, ask questions about visible features, detect objects with bounding boxes, and locate features with point markers.
+- **Chapter 17: Setting Up the GeoAI QGIS Plugin** walks through installing and configuring the GeoAI QGIS plugin. You'll use the built-in dependency installer or set up a Pixi environment with PyTorch and CUDA support, install the plugin, and learn to manage GPU memory for running large AI models within QGIS.
+- **Chapter 18: Tree Segmentation in QGIS** demonstrates the Tree Segmentation panel for tree crown detection and ecological object detection. You'll load pre-trained models for trees, birds, livestock, nests, and dead trees, configure prediction parameters for single images and large tiles, and export results in vector, raster, and training data formats.
+- **Chapter 19: Water Segmentation in QGIS** covers the Water Segmentation panel for automated water body detection using OmniWaterMask. You'll configure band ordering for different sensors, tune patch-based inference parameters, integrate OpenStreetMap data for refinement, and export water masks as raster and vector data.
+- **Chapter 20: Vision-Language Models in QGIS** demonstrates the Moondream VLM panel for natural language interaction with geospatial imagery. You'll generate image captions, ask questions about visible features, detect objects with bounding boxes, and locate features with point markers.
+- **Chapter 21: Segment Anything in QGIS** demonstrates the Segment Anything panel for interactive and automated segmentation. You'll load SAM 3, segment objects using text prompts, perform interactive segmentation with point and box prompts, process batches of features, and export georeferenced results.
+- **Chapter 22: Semantic Segmentation in QGIS** covers the complete training-to-inference workflow for pixel-level classification without writing code. You'll create training datasets, choose from architectures like U-Net, DeepLabV3+, and SegFormer, train custom models, and run inference with vectorization and smoothing.
+- **Chapter 23: Instance Segmentation in QGIS** demonstrates instance-level object detection using Mask R-CNN. You'll create instance training data in PASCAL_VOC format, train models to detect and delineate individual objects, and use per-object output for counting, measurement, and spatial analysis.
 
 _By the end of Part V_, you'll be able to run sophisticated GeoAI workflows directly within QGIS, making AI-powered analysis accessible to GIS practitioners without requiring Python programming expertise.
 
@@ -159,15 +161,15 @@ To maximize your learning experience with this book, consider the following reco
 
 **Set Up Your Environment Early**: Follow Chapter 2 carefully to configure your Python environment with GPU support. Many GeoAI tasks benefit significantly from GPU acceleration, and a properly configured environment will save you considerable time throughout the book. If you don't have a local GPU, the book provides guidance on using cloud-based GPU platforms like Google Colab.
 
-**Follow Along with the Code**: This book is designed to be interactive. Don't just read the code - type it out, run it, and observe the results. Modify parameters, try different datasets, and experiment. Understanding comes through practice, and the hands-on examples are the heart of this book. When something does not work as expected, resist the urge to skip ahead. Debugging is one of the most valuable learning experiences, and the troubleshooting skills you develop will serve you throughout your GeoAI career.
+**Follow Along with the Code**: This book is designed to be interactive. Don't just read the code. Type it out, run it, and observe the results. Modify parameters, try different datasets, and experiment. Understanding comes through practice, and the hands-on examples are the heart of this book. When something does not work as expected, resist the urge to skip ahead. Debugging is one of the most valuable learning experiences, and the troubleshooting skills you develop will serve you throughout your GeoAI career.
 
-**Work Through the Chapters Sequentially**: While experienced practitioners may jump to specific topics, the chapters build on each other. Concepts introduced in earlier chapters - environment setup, data formats, visualization techniques - are used throughout the book. If you skip ahead, refer back when needed.
+**Work Through the Chapters Sequentially**: While experienced practitioners may jump to specific topics, the chapters build on each other. Concepts introduced in earlier chapters (environment setup, data formats, visualization techniques) are used throughout the book. If you skip ahead, refer back when needed.
 
 **Use Your Own Data**: While the book provides datasets for every example, the real learning happens when you apply these techniques to data you care about. Try running the segmentation models on imagery of your study area, or train an object detection model on features relevant to your research.
 
 **Embrace the Errors**: Training deep learning models involves iteration. Models won't always converge on the first try, predictions won't always be perfect, and GPUs will occasionally run out of memory. These are learning opportunities. The book addresses common pitfalls and debugging strategies, but developing the instinct to diagnose problems comes through experience.
 
-**Build a Portfolio Project**: As you progress through the book, identify a geospatial problem that interests you and apply the techniques you're learning. A complete project - from data acquisition to model training to visualization - demonstrates your skills far more effectively than any certification.
+**Build a Portfolio Project**: As you progress through the book, identify a geospatial problem that interests you and apply the techniques you're learning. A complete project, from data acquisition to model training to visualization, demonstrates your skills far more effectively than any certification.
 
 **Stay Current**: GeoAI is a rapidly evolving field. New foundation models, architectures, and tools emerge regularly. The book's GitHub repository is updated periodically with new content and examples for continuing your learning journey.
 
@@ -195,27 +197,14 @@ m
 - `torch` / `torchvision` / `torchgeo` - deep learning with PyTorch
 - `rasterio` / `geopandas` - reading and writing geospatial data
 
-**Command Line Instructions**: Commands to be entered at the terminal are shown with a `$` prompt (don't type the `$` symbol itself):
-
-```bash
-$ conda create -n geoai python=3.12
-$ conda activate geoai
-$ pip install geoai
-```
-
-**Tips, Notes, and Warnings**: Important information is highlighted in callout boxes:
-
-- **Tips** offer practical advice and shortcuts
-- **Notes** provide additional context or explain concepts in more depth
-- **Warnings** alert you to common mistakes or potential issues
-
 **Figures and Maps**: Interactive maps are rendered directly in Jupyter notebooks. In the print edition, static snapshots are shown with captions describing the interactive features available in the online version.
 
 ## Downloading the Code Examples
 
-All code examples, datasets, and supplementary materials for this book are freely available on GitHub:
+All code examples and supplementary materials for this book are freely available on GitHub:
+<https://github.com/giswqs/GeoAI-Book>
 
-**<https://github.com/giswqs/GeoAI-Book>**
+All sample datasets are available at Source Cooperative: <https://source.coop/opengeos/geoai>
 
 To download the materials, you can use one of the following methods:
 
@@ -276,24 +265,6 @@ I welcome feedback, questions, and suggestions from readers. Your input helps im
 - Ideas for new topics or emerging GeoAI techniques to cover
 - Success stories of how you've applied the techniques from the book to your own work
 
-## Acknowledgments
-
-This book exists thanks to the contributions of many individuals and the broader open-source geospatial and AI communities.
-
-First, I want to thank the **open-source geospatial community** for building the incredible ecosystem of tools that makes this book possible. Projects like GDAL, Rasterio, GeoPandas, Shapely, PyTorch, TorchGeo, and countless others form the foundation upon which modern GeoAI is built. The collaborative spirit of this community - sharing code, data, and knowledge freely - continues to inspire my work and is a model for how science should be done.
-
-I'm deeply grateful to **Meta AI Research** for releasing the Segment Anything Model (SAM) as open source, which catalyzed much of the work described in this book and led to the development of the [segment-geospatial](https://samgeo.gishub.org) package. The broader trend toward open foundation models for Earth observation - from NASA, ESA, IBM, and others - is democratizing access to cutting-edge AI capabilities.
-
-Special thanks to the **contributors to my open-source projects** - [geemap](https://geemap.org), [leafmap](https://leafmap.org), [segment-geospatial](https://samgeo.gishub.org), and [geoai](https://opengeoai.org). Their bug reports, feature requests, pull requests, and community engagement have shaped these tools into what they are today. This book is as much a product of their contributions as it is of my own.
-
-I'm grateful to my **colleagues and students** at the University of Tennessee who have tested examples, asked probing questions, and provided feedback that improved both the tools and this text. Teaching has always sharpened my own understanding, and the questions from students have a way of revealing what truly matters.
-
-Thanks to the **early readers and reviewers** who provided feedback on draft chapters. Their diverse perspectives - from seasoned remote sensing researchers to deep learning newcomers, from software engineers to environmental scientists - helped ensure this book serves its intended audience.
-
-I want to acknowledge **my family** for their patience and unwavering support during the many evenings and weekends spent writing, coding, and revising. Their encouragement and understanding made this project possible.
-
-Finally, thanks to **you**, the reader, for your interest in GeoAI and open-source tools. Whether you're mapping deforestation, detecting urban change, monitoring agriculture, or building the next generation of geospatial applications, it's practitioners like you who translate these techniques into real-world impact. If this book helps you see the Earth more clearly through the lens of AI, then all the effort has been worthwhile.
-
 ## About the Author
 
 Dr. Qiusheng Wu is an Associate Professor and the Director of Graduate Studies in the Department of Geography & Sustainability at the University of Tennessee, Knoxville. He also serves as an Amazon Scholar. Dr. Wu's research focuses on advancing open-source geospatial analytics through cloud computing and GeoAI, with an emphasis on leveraging big geospatial data and artificial intelligence to study environmental change, particularly surface water and wetland inundation dynamics.
@@ -314,10 +285,10 @@ This book embraces the principles of open science and open education. To support
 
 Please attribute code usage by citing the book or linking to the GitHub repository:
 
-Wu, Q. (2026). *GeoAI with Python: A Hands-On Guide to Geospatial AI*. Available at [book.opengeoai.org](https://book.opengeoai.org).
+Wu, Q. (2026). *GeoAI with Python: A Practical Guide to Open-Source Geospatial AI*. Independently published. PDF edition ISBN 979-8993859729; Print edition ISBN 979-8253507414. Available at [book.opengeoai.org](https://book.opengeoai.org).
 
 While the code is freely available, the **text, figures, and images** in this book are **copyrighted** © 2026 by the author and may not be reproduced, redistributed, or modified without explicit permission. This includes all written content, custom diagrams, and embedded visualizations unless otherwise noted.
 
-If you wish to reuse or adapt any non-code material from the book - for example, for teaching, presentations, or publications - please contact the author to request permission.
+If you wish to reuse or adapt any non-code material from the book (for example, for teaching, presentations, or publications), please contact the author to request permission.
 
 This dual licensing approach helps balance open access to learning materials with the protection of original creative work. Thank you for respecting these terms and supporting the open-source geospatial community.

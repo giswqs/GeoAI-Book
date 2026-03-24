@@ -16,6 +16,8 @@ kernelspec:
 
 ## Learning Objectives
 
+## Sample Data
+
 ## Loading a SAM Model
 
 ## Text-Prompted Segmentation
@@ -26,17 +28,7 @@ kernelspec:
 
 ### Bounding Box Prompts
 
-### Segmenting with Points and Boxes
-
-### Managing Prompts
-
 ## Batch Processing
-
-### Adding Points Interactively
-
-### Loading Points from Layers and Files
-
-### Running Batch Segmentation
 
 ## Exporting Results
 
@@ -48,28 +40,14 @@ kernelspec:
 
 ### Simplification and Area Filtering
 
-## Practical Workflows
-
-### Building Footprint Extraction
-
-### Tree Canopy Delineation
-
-### Hardware Considerations
-
-### Tips for Effective Use
-
-### Comparison with Python-Based Workflows
-
 ## Key Takeaways
 
 ## Exercises
 
-### Exercise 1: Comparing SAM Model Generations
+### Exercise 1: Comparing Inference Backends
 
 ### Exercise 2: Interactive Refinement of Text-Prompted Results
 
 ### Exercise 3: Batch Processing with Building Centroids
 
 ### Exercise 4: Tuning Output Parameters
-
-### Exercise 5: End-to-End Multi-Feature Extraction

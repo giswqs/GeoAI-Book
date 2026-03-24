@@ -4,9 +4,9 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.17.3
+    jupytext_version: 1.18.1
 kernelspec:
-  display_name: Python 3
+  display_name: geo
   language: python
   name: python3
 ---
@@ -42,12 +42,6 @@ kernelspec:
 
 ### The EuroSAT Dataset
 
-## Install Packages
-
-```{code-cell} ipython3
-# %pip install geoai-py
-```
-
 ## Import Libraries
 
 ```{code-cell} ipython3
@@ -61,6 +55,8 @@ from geoai.recognize import (
     plot_training_history,
     plot_confusion_matrix,
     plot_predictions,
+    push_classifier_to_hub,
+    predict_images_from_hub,
 )
 ```
 
@@ -68,19 +64,20 @@ from geoai.recognize import (
 
 ```{code-cell} ipython3
 url = "https://data.source.coop/opengeos/geoai/EuroSAT-RGB.zip"
-download_dir = download_file(url)
+data_dir = download_file(url)
 ```
 
 ```{code-cell} ipython3
-data_dir = os.path.join(download_dir, "EuroSAT_RGB")
 print(f"Dataset directory: {data_dir}")
-print(f"Classes: {sorted(os.listdir(data_dir))}")
+print(f"Files: {sorted(os.listdir(data_dir))}")
 ```
 
 ## Explore the Dataset
 
 ```{code-cell} ipython3
 dataset_info = load_image_dataset(data_dir)
+print(f"Classes ({len(dataset_info['class_names'])}): {dataset_info['class_names']}")
+print(f"Total images: {len(dataset_info['image_paths'])}")
 ```
 
 ```{code-cell} ipython3
@@ -108,7 +105,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Train a ResNet50 Classifier
+## Train a ResNet-50 Classifier
 
 ```{code-cell} ipython3
 result = train_image_classifier(
@@ -165,22 +162,30 @@ plt.show()
 ## Visualize Predictions
 
 ```{code-cell} ipython3
+import random
+
 test_dataset = result["test_dataset"]
 test_paths = test_dataset.image_paths
 test_labels = test_dataset.labels
+n_samples = min(10, len(test_paths))
+
+rng = random.Random(42)
+sample_indices = rng.sample(range(len(test_paths)), k=n_samples)
+sample_paths = [test_paths[i] for i in sample_indices]
+sample_labels = [test_labels[i] for i in sample_indices]
 
 pred_result = predict_images(
     model=result["model"],
-    image_paths=test_paths[:20],
+    image_paths=sample_paths,
     class_names=result["class_names"],
     image_size=64,
     in_channels=3,
 )
 
 fig = plot_predictions(
-    image_paths=test_paths[:20],
+    image_paths=sample_paths,
     predictions=pred_result["predictions"],
-    true_labels=test_labels[:20],
+    true_labels=sample_labels,
     class_names=result["class_names"],
     probabilities=pred_result["probabilities"],
 )
@@ -206,6 +211,11 @@ result_effnet = train_image_classifier(
 ```
 
 ```{code-cell} ipython3
+fig = plot_training_history("image_recognition_output/efficientnet_b0/models")
+plt.show()
+```
+
+```{code-cell} ipython3
 eval_effnet = evaluate_classifier(
     model=result_effnet["model"],
     dataset=result_effnet["test_dataset"],
@@ -225,8 +235,53 @@ plt.show()
 ## Compare Results
 
 ```{code-cell} ipython3
-print(f"ResNet50 accuracy:       {eval_result['accuracy']:.4f}")
+print(f"ResNet50 accuracy:        {eval_result['accuracy']:.4f}")
 print(f"EfficientNet-B0 accuracy: {eval_effnet['accuracy']:.4f}")
+```
+
+## Publish and Reuse Models
+
+### Authenticate with Hugging Face
+
+```{code-cell} ipython3
+from huggingface_hub import notebook_login
+
+notebook_login()
+```
+
+### Push the Trained Model to the Hub
+
+```{code-cell} ipython3
+repo_url = push_classifier_to_hub(
+    model_path=result["checkpoint_path"],
+    repo_id="your-username/eurosat-resnet50",
+    model_name="resnet50",
+    num_classes=len(result["class_names"]),
+    in_channels=3,
+    class_names=result["class_names"],
+    commit_message="EuroSAT ResNet-50 classifier trained for 5 epochs",
+)
+print(repo_url)
+```
+
+### Run Inference from the Hub
+
+```{code-cell} ipython3
+n_samples = 10
+hub_result = predict_images_from_hub(
+    image_paths=test_paths[:n_samples],
+    repo_id="your-username/eurosat-resnet50",
+    image_size=64,
+)
+
+fig = plot_predictions(
+    image_paths=test_paths[:n_samples],
+    predictions=hub_result["predictions"],
+    true_labels=test_labels[:n_samples],
+    class_names=hub_result["class_names"],
+    probabilities=hub_result["probabilities"],
+)
+plt.show()
 ```
 
 ## Key Takeaways
@@ -235,10 +290,24 @@ print(f"EfficientNet-B0 accuracy: {eval_effnet['accuracy']:.4f}")
 
 ### Exercise 1: Train a Multi-Architecture Comparison
 
+```{code-cell} ipython3
+
+```
+
 ### Exercise 2: Experiment with Transfer Learning Strategies
+
+```{code-cell} ipython3
+
+```
 
 ### Exercise 3: Evaluate on a Custom Dataset
 
+```{code-cell} ipython3
+
+```
+
 ### Exercise 4: Hyperparameter Sensitivity Analysis
 
-### Exercise 5: Multi-Band Classification with GeoTIFF
+```{code-cell} ipython3
+
+```

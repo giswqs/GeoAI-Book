@@ -4,9 +4,9 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.17.3
+    jupytext_version: 1.18.1
 kernelspec:
-  display_name: Python 3
+  display_name: geo
   language: python
   name: python3
 ---
@@ -20,172 +20,348 @@ kernelspec:
 
 ## Setting Up the Environment
 
-```{code-cell} python
-# %pip install geoai leafmap
+```{code-cell} ipython3
+# %pip install geoai-py transformers==4.57.6
 ```
 
-```{code-cell} python
+```{code-cell} ipython3
 import geoai
 import leafmap
+from geoai import MoondreamGeo
+```
+
+## Sample Data
+
+```{code-cell} ipython3
+url = "https://data.source.coop/opengeos/geoai/parking-lot.tif"
+image_path = geoai.download_file(url)
+```
+
+```{code-cell} ipython3
+m = leafmap.Map()
+m.add_raster(image_path, layer_name="Satellite Image")
+m
+```
+
+## Initializing the Moondream Processor
+
+```{code-cell} ipython3
+processor = MoondreamGeo(
+    model_name="vikhyatk/moondream2",
+    revision="2025-06-21",
+)
 ```
 
 ## Image Captioning
 
-```{code-cell} python
-building_url = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/caption-building.webp"
-building_image = geoai.download_file(building_url)
+```{code-cell} ipython3
+result = processor.caption(image_path, length="short")
+print(result["caption"])
 ```
 
-```{code-cell} python
-caption = geoai.moondream_caption(building_image)
-print(caption)
+```{code-cell} ipython3
+result = processor.caption(image_path, length="normal")
+print(result["caption"])
 ```
 
-```{code-cell} python
-traffic_url = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/caption-traffic-sign.webp"
-traffic_image = geoai.download_file(traffic_url)
-caption = geoai.moondream_caption(traffic_image)
-print(caption)
-```
-
-```{code-cell} python
-water_url = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/caption-water.webp"
-water_image = geoai.download_file(water_url)
-caption = geoai.moondream_caption(water_image)
-print(caption)
+```{code-cell} ipython3
+result = processor.caption(image_path, length="long")
+print(result["caption"])
 ```
 
 ## Visual Question Answering
 
-```{code-cell} python
-answer = geoai.moondream_query(building_image, "How many stories does this building have?")
-print(answer)
+```{code-cell} ipython3
+result = processor.query("How many buildings are in the image?", image_path)
+print(result["answer"])
 ```
 
-```{code-cell} python
-answer = geoai.moondream_query(water_image, "What type of water body is shown in this image?")
-print(answer)
+```{code-cell} ipython3
+result = processor.query("What are the building roof colors?", image_path)
+print(result["answer"])
 ```
 
-```{code-cell} python
-answer = geoai.moondream_query(traffic_image, "What text appears on the sign?")
-print(answer)
+```{code-cell} ipython3
+result = processor.query("What types of vehicles are visible in the parking areas?", image_path)
+print(result["answer"])
 ```
 
-```{code-cell} python
-response = geoai.moondream(building_image, "Describe the architectural style and surrounding environment.")
-print(response)
+## Object Detection and Point Localization
+
+### Detect Buildings
+
+```{code-cell} ipython3
+result = processor.detect(image_path, "building", output_path="buildings.geojson")
+print(f"Detected {len(result['objects'])} buildings")
 ```
 
-## Text-Guided Object Detection
-
-```{code-cell} python
-detections = geoai.moondream_detect(building_image, "window")
-print(detections)
+```{code-cell} ipython3
+result["gdf"]
 ```
 
-```{code-cell} python
-points = geoai.moondream_point(building_image, "window")
-print(points)
+```{code-cell} ipython3
+style = {"color": "red", "weight": 2}
+m.add_gdf(result["gdf"], layer_name="Buildings", style=style)
+m
 ```
 
-```{code-cell} python
-detections = geoai.moondream_detect(traffic_image, "sign")
-print(detections)
+### Locate Building Centroids
+
+```{code-cell} ipython3
+result = processor.point(
+    image_path, "building", output_path="building_centroids.geojson"
+)
+print(f"Found {len(result['points'])} building centroids")
+```
+
+```{code-cell} ipython3
+m.add_gdf(result["gdf"], layer_name="Building Centroids")
+m
+```
+
+### Detect Trees
+
+```{code-cell} ipython3
+result = processor.detect(image_path, "tree", output_path="trees.geojson")
+print(f"Detected {len(result['objects'])} trees")
+```
+
+```{code-cell} ipython3
+m.add_gdf(result["gdf"], layer_name="Trees", style={"color": "green", "weight": 2})
+```
+
+### Locate Tree Centroids
+
+```{code-cell} ipython3
+result = processor.point(image_path, "tree", output_path="tree_centroids.geojson")
+print(f"Found {len(result['points'])} tree centroids")
+```
+
+```{code-cell} ipython3
+m.add_gdf(result["gdf"], layer_name="Tree Centroids")
+m
+```
+
+## Interactive GUI
+
+```{code-cell} ipython3
+moondream = MoondreamGeo(
+    model_name="vikhyatk/moondream2",
+    revision="2025-06-21",
+)
+moondream.load_image(image_path)
+m_gui = moondream.show_gui()
+m_gui
+```
+
+```{code-cell} ipython3
+gdf = m_gui.last_result_as_gdf
+gdf
 ```
 
 ## Sliding Window Analysis for Large Rasters
 
-```{code-cell} python
-aerial_url = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/aerial.tif"
-aerial_path = geoai.download_file(aerial_url)
+### Object Detection with Sliding Window
+
+```{code-cell} ipython3
+result = processor.detect_sliding_window(
+    image_path,
+    "car",
+    window_size=512,
+    overlap=64,
+    iou_threshold=0.5,
+    output_path="cars_sliding_window.geojson",
+)
+print(f"Detected {len(result['objects'])} cars")
 ```
 
-```{code-cell} python
-m = leafmap.Map()
-m.add_raster(aerial_path, layer_name="Aerial Image")
-m
+```{code-cell} ipython3
+result["gdf"].head()
 ```
 
-### Sliding Window Captioning
-
-```{code-cell} python
-captions_gdf = geoai.moondream_caption_sliding_window(aerial_path)
-captions_gdf.head()
-```
-
-```{code-cell} python
+```{code-cell} ipython3
 m2 = leafmap.Map()
-m2.add_raster(aerial_path, layer_name="Aerial Image")
-m2.add_gdf(captions_gdf, layer_name="Captions")
+m2.add_raster(image_path, layer_name="Satellite Image")
+m2.add_gdf(
+    result["gdf"],
+    layer_name="Detected Cars",
+    style={"color": "red", "fillOpacity": 0.3},
+)
 m2
 ```
 
-### Sliding Window Query
+### Point Detection with Sliding Window
 
-```{code-cell} python
-query_gdf = geoai.moondream_query_sliding_window(
-    aerial_path,
-    "What land cover types are visible in this area?"
+```{code-cell} ipython3
+trees = processor.point_sliding_window(
+    image_path,
+    "tree",
+    window_size=512,
+    overlap=64,
+    output_path="trees_sliding_window.geojson",
 )
-query_gdf.head()
+print(f"Found {len(trees['points'])} tree locations")
 ```
 
-### Sliding Window Detection
-
-```{code-cell} python
-detect_gdf = geoai.moondream_detect_sliding_window(aerial_path, "building")
-detect_gdf.head()
-```
-
-```{code-cell} python
+```{code-cell} ipython3
 m3 = leafmap.Map()
-m3.add_raster(aerial_path, layer_name="Aerial Image")
-m3.add_gdf(detect_gdf, layer_name="Building Detections", style={"color": "red", "weight": 2})
+m3.add_raster(image_path, layer_name="Satellite Image")
+m3.add_gdf(trees["gdf"], layer_name="Trees", style={"color": "green", "radius": 3})
 m3
 ```
 
-### Sliding Window Point Localization
+### Visual Question Answering with Sliding Window
 
-```{code-cell} python
-points_gdf = geoai.moondream_point_sliding_window(aerial_path, "tree")
-points_gdf.head()
+```{code-cell} ipython3
+result = processor.query_sliding_window(
+    "What types of vehicles are visible?",
+    image_path,
+    window_size=512,
+    overlap=64,
+    combine_strategy="concatenate",
+)
+print(result["answer"])
 ```
 
-```{code-cell} python
-m4 = leafmap.Map()
-m4.add_raster(aerial_path, layer_name="Aerial Image")
-m4.add_gdf(points_gdf, layer_name="Tree Points", style={"color": "green"})
-m4
+```{code-cell} ipython3
+result = processor.query_sliding_window(
+    "Describe the land use and features in this area.",
+    image_path,
+    window_size=512,
+    overlap=64,
+    combine_strategy="summarize",
+)
+print(result["answer"])
 ```
 
-## CLIP-Based Segmentation
-
-```{code-cell} python
-berkeley_url = "https://huggingface.co/datasets/giswqs/geospatial/resolve/main/uc_berkeley.tif"
-berkeley_path = geoai.download_file(berkeley_url)
+```{code-cell} ipython3
+for tile in result["tile_answers"][:2]:  # Show first 2 tiles
+    print(f"Tile {tile['tile_id']}: {tile['answer']}\n")
 ```
 
-```{code-cell} python
-m5 = leafmap.Map()
-m5.add_raster(berkeley_path, layer_name="UC Berkeley")
-m5
+### Image Captioning with Sliding Window
+
+```{code-cell} ipython3
+result = processor.caption_sliding_window(
+    image_path,
+    window_size=512,
+    overlap=64,
+    length="normal",
+    combine_strategy="concatenate",
+)
+print(result["caption"])
 ```
 
-```{code-cell} python
-result = geoai.CLIPSegmentation(
-    berkeley_path,
-    text_prompts=["building", "tree", "road"],
-    output_dir="clip_seg_output",
+```{code-cell} ipython3
+result = processor.caption_sliding_window(
+    image_path,
+    window_size=512,
+    overlap=64,
+    length="long",
+    combine_strategy="summarize",
+)
+print(result["caption"])
+```
+
+```{code-cell} ipython3
+geoai.empty_cache()
+```
+
+### Convenience Functions
+
+```{code-cell} ipython3
+from geoai import moondream_detect_sliding_window
+
+result = moondream_detect_sliding_window(
+    image_path,
+    "car",
+    window_size=512,
+    overlap=64,
+    model_name="vikhyatk/moondream2",
+    revision="2025-06-21",
+)
+print(f"Detected {len(result['objects'])} cars")
+```
+
+```{code-cell} ipython3
+geoai.view_vector_interactive(result["gdf"], tiles=image_path)
+```
+
+### Comparing Regular vs. Sliding Window Detection
+
+```{code-cell} ipython3
+processor = MoondreamGeo(
+    model_name="vikhyatk/moondream2",
+    revision="2025-06-21",
 )
 ```
 
-```{code-cell} python
-m6 = leafmap.Map()
-m6.add_raster(berkeley_path, layer_name="UC Berkeley")
-m6.add_raster("clip_seg_output/building.tif", layer_name="Buildings", colormap="Reds", opacity=0.6)
-m6.add_raster("clip_seg_output/tree.tif", layer_name="Trees", colormap="Greens", opacity=0.6)
-m6
+```{code-cell} ipython3
+regular_result = processor.detect(image_path, "car")
+print(f"Regular detection: {len(regular_result['objects'])} cars")
+
+sliding_result = processor.detect_sliding_window(
+    image_path, "car", window_size=512, overlap=64
+)
+print(f"Sliding window detection: {len(sliding_result['objects'])} cars")
+```
+
+```{code-cell} ipython3
+geoai.empty_cache()
+```
+
+### Performance Tips
+
+## CLIP-Based Segmentation
+
+```{code-cell} ipython3
+clip_image_url = "https://data.source.coop/opengeos/geoai/uc-berkeley.tif"
+clip_image_path = geoai.download_file(clip_image_url)
+```
+
+```{code-cell} ipython3
+geoai.view_raster(clip_image_path)
+```
+
+```{code-cell} ipython3
+segmenter = geoai.CLIPSegmentation(tile_size=512, overlap=32)
+```
+
+```{code-cell} ipython3
+mask_output_path = "tree_masks.tif"
+text_prompt = "trees"
+```
+
+```{code-cell} ipython3
+segmenter.segment_image(
+    clip_image_path,
+    output_path=mask_output_path,
+    text_prompt=text_prompt,
+    threshold=0.5,
+    smoothing_sigma=1.0,
+)
+```
+
+```{code-cell} ipython3
+geoai.view_raster(
+    mask_output_path,
+    nodata=0,
+    opacity=0.7,
+    colormap="greens",
+    layer_name="Trees",
+    basemap=clip_image_path,
+)
+```
+
+```{code-cell} ipython3
+geoai.create_split_map(
+    left_layer=mask_output_path,
+    right_layer=clip_image_path,
+    left_label="Trees",
+    right_label="Satellite Image",
+    left_args={"nodata": 0, "opacity": 0.8, "colormap": "greens"},
+    basemap=clip_image_path,
+)
 ```
 
 ## Practical Applications in Earth Observation
@@ -196,32 +372,26 @@ m6
 
 ## Exercises
 
-### Exercise 1: Comparative Captioning
+### Exercise 1: Caption Length Comparison
 
-```{code-cell} python
-# Your code here
+```{code-cell} ipython3
+
 ```
 
 ### Exercise 2: Geospatial Visual Question Answering
 
-```{code-cell} python
-# Your code here
+```{code-cell} ipython3
+
 ```
 
 ### Exercise 3: Object Detection and Counting
 
-```{code-cell} python
-# Your code here
+```{code-cell} ipython3
+
 ```
 
 ### Exercise 4: Multi-Class CLIP Segmentation
 
-```{code-cell} python
-# Your code here
-```
+```{code-cell} ipython3
 
-### Exercise 5: VLM-Assisted Damage Assessment
-
-```{code-cell} python
-# Your code here
 ```

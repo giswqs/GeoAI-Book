@@ -95,14 +95,12 @@ import os
 
 ```{code-cell} ipython3
 url = "https://data.source.coop/opengeos/geoai/naip-rgb-train-tiles.zip"
-download_dir = geoai.download_file(url)
+data_dir = geoai.download_file(url)
 ```
 
 ### Explore Sample Data
 
 ```{code-cell} ipython3
-data_dir = os.path.join(download_dir, "data")
-
 print("Images:")
 for f in sorted(os.listdir(f"{data_dir}/images")):
     print(f"  - {f}")
@@ -261,19 +259,23 @@ result = geoai.export_geotiff_tiles_batch(
 ### Exercise 1: Generate Image Chips with Different Overlap Settings
 
 ```{code-cell} ipython3
+
 ```
 
 ### Exercise 2: Batch Process with Different Pairing Methods
 
 ```{code-cell} ipython3
+
 ```
 
 ### Exercise 3: Visualize and Validate Training Data
 
 ```{code-cell} ipython3
+
 ```
 
 ### Exercise 4: Prepare a Complete Training Dataset
 
 ```{code-cell} ipython3
+
 ```
