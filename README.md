@@ -1,81 +1,111 @@
-# GeoAI with Python: A Hands-On Guide to Geospatial AI
+# GeoAI with Python
 
-[![Jupyter Book](https://img.shields.io/badge/Jupyter%20Book-v2-orange?logo=jupyter)](https://jupyterbook.org)
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+## Introduction
 
-A comprehensive guide to applying artificial intelligence to geospatial data using Python. This book covers everything from downloading satellite imagery to building QGIS plugins, with hands-on code examples using the [geoai](https://github.com/opengeos/geoai) package and the broader Python geospatial ecosystem.
+Welcome to the official repository for _**GeoAI with Python: A Practical Guide to Open-Source Geospatial AI**_. This repository contains all the code examples featured in the book, designed to help you learn and apply GeoAI using open-source tools.
 
-## Book Structure
+## Get the Book
 
-### Part I: Foundations (Chapters 1-3)
-Set up your development environment, understand geospatial data formats, and learn the building blocks for GeoAI workflows.
+- 🇺🇸 **Full-Color Print Edition (423 pages):** Coming soon
 
-### Part II: Data Acquisition and Preparation (Chapters 4-6)
-Download remote sensing data from the Planetary Computer and HuggingFace, create interactive visualizations, and prepare training datasets with proper tiling and augmentation.
+- 🇺🇸 **English PDF Edition (423 pages):** Available on Leanpub ([link](https://leanpub.com/geoai))
 
-### Part III: Core AI Tasks (Chapters 7-12)
-Master the fundamental computer vision tasks for geospatial analysis: image segmentation, object detection, instance segmentation, land cover classification, change detection, and pixel-level regression.
+## Cite the Book
 
-### Part IV: Foundation Models and Satellite Embeddings (Chapters 13-16)
-Explore cutting-edge approaches including the Segment Anything Model (SAM), vision-language models, satellite embeddings from foundation models, and AI agents for geospatial analysis.
+If you use this book in your research or teaching, please consider citing it as follows:
 
-### Part V: QGIS Plugins (Chapters 17-20)
-Bring GeoAI capabilities into QGIS through the GeoAI plugin, covering installation, Segment Anything, training and inference, and vision-language models in a familiar desktop GIS environment.
+> Wu, Q. (2026). *GeoAI with Python: A Practical Guide to Open-Source Geospatial AI*. Independently published. PDF edition ISBN 979-8993859729; Print edition ISBN 979-8253507414. Available at [book.opengeoai.org](https://book.opengeoai.org).
 
-## Key Technologies
+![](https://books.gishub.org/geoai/front-cover.webp)
 
-- **[geoai](https://github.com/opengeos/geoai)** - High-level Python package for geospatial AI
-- **[segment-geospatial](https://github.com/opengeos/segment-geospatial)** - SAM for geospatial data
-- **[leafmap](https://github.com/opengeos/leafmap)** - Interactive mapping and visualization
-- **[torchgeo](https://github.com/microsoft/torchgeo)** - PyTorch datasets and models for geospatial data
-- **[rasterio](https://github.com/rasterio/rasterio)** / **[geopandas](https://github.com/geopandas/geopandas)** - Core geospatial I/O
+## About This Book
 
-## Getting Started
+Learn to apply deep learning and AI to satellite imagery, aerial photos, and geospatial data using Python. This practical, hands-on guide walks you from downloading remote sensing data to training and evaluating deep learning models, all using open-source tools.
 
-### Prerequisites
+**What you’ll learn**
 
-- Python 3.12+
-- NVIDIA GPU recommended (but not required)
-- Conda or Miniconda
+- Set up a complete GeoAI environment with Python, PyTorch, and GPU acceleration.
+- Download satellite imagery from Microsoft Planetary Computer and open data portals.
+- Create interactive maps and prepare training datasets from large satellite images.
+- Train and evaluate models for seven core geospatial AI tasks: image recognition, object detection, semantic segmentation, instance segmentation, image translation, change detection, and pixel-level regression.
+- Apply foundation models, including the Segment Anything Model (SAM), vision-language models, and satellite embeddings, to real-world Earth observation problems.
+- Run AI workflows in QGIS without writing code using plugins for tree segmentation, water detection, and more.
 
-### Installation
+**Structure and format**
 
-```bash
-conda create -n geoai python=3.12
-conda activate geoai
-pip install geoai-py segment-geospatial leafmap
-```
+- 23 chapters of executable code examples organized in five parts: Foundations, Data Acquisition and Preparation, Core AI Tasks, Foundation Models, and QGIS Plugins.
+- All examples use real satellite imagery with PyTorch, torchgeo, segment-geospatial, leafmap, and geoai.
+- All code and datasets are freely available on GitHub and Source Cooperative for full reproducibility.
 
-### Building the Book
+**Who it’s for**
 
-Build the HTML version:
+GIS professionals, remote sensing scientists, data scientists, and students who want to apply AI to geospatial data using Python and open-source tools.
 
-```bash
-myst build --html
-```
 
-Build the PDF via Typst:
 
-```bash
-myst build --typst
-python myst_to_typst.py
-cd _build/typst/ && typst compile main.typ
-```
+## Table of Contents
 
-## Sample Data
+### Preface
 
-All code examples use freely available data from the [giswqs/geospatial](https://huggingface.co/datasets/giswqs/geospatial) HuggingFace dataset, including NAIP aerial imagery, Landsat satellite imagery, building footprints, and land cover labels.
+- [Preface](book/preface.md)
 
-## Author
+### Part I: Foundations
 
-**Qiusheng Wu**
-Department of Geography & Sustainability, University of Tennessee, Knoxville
-[GitHub](https://github.com/giswqs) | [Website](https://wetlands.io)
+1. [Introduction to GeoAI](book/foundations/introduction.md)
+2. [Setting Up Your Environment](book/foundations/setup.md)
+3. [Geospatial Data Essentials](book/foundations/data-formats.md)
 
-## License
+### Part II: Data Acquisition and Preparation
 
-This book is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+4. [Downloading Remote Sensing Data](book/data/download-data.md)
+5. [Interactive Mapping and Visualization](book/data/visualization.md)
+6. [Preparing Training Data](book/data/training-data.md)
 
-## Credits
+### Part III: Core AI Tasks
 
-Built with [Jupyter Book](https://jupyterbook.org/) and [MyST Markdown](https://mystmd.org/).
+7. [Image Recognition](book/core_tasks/image-recognition.md)
+8. [Object Detection](book/core_tasks/object-detection.md)
+9. [Semantic Segmentation](book/core_tasks/semantic-segmentation.md)
+10. [Instance Segmentation](book/core_tasks/instance-segmentation.md)
+11. [Image Translation](book/core_tasks/image-translation.md)
+12. [Change Detection](book/core_tasks/change-detection.md)
+13. [Pixel-Level Regression](book/core_tasks/pixel-regression.md)
+
+### Part IV: Foundation Models and Satellite Embeddings
+
+14. [SAM for Geospatial Applications](book/advanced/sam-geospatial.md)
+15. [Vision-Language Models](book/advanced/vision-language-models.md)
+16. [Satellite Embeddings](book/advanced/foundation-models.md)
+
+### Part V: QGIS Plugins
+
+17. [Setting Up the GeoAI QGIS Plugin](book/qgis/installation.md)
+18. [Tree Segmentation in QGIS](book/qgis/tree-segmentation.md)
+19. [Water Segmentation in QGIS](book/qgis/water-segmentation.md)
+20. [Vision-Language Models in QGIS](book/qgis/vlm-plugin.md)
+21. [Segment Anything in QGIS](book/qgis/samgeo-plugin.md)
+22. [Semantic Segmentation in QGIS](book/qgis/semantic-segmentation.md)
+23. [Instance Segmentation in QGIS](book/qgis/instance-segmentation.md)
+
+
+## About the Author
+
+Dr. Qiusheng Wu is an Associate Professor and the Director of Graduate Studies in the Department of Geography & Sustainability at the University of Tennessee, Knoxville. He also serves as an Amazon Scholar. Dr. Wu's research focuses on advancing open-source geospatial analytics through cloud computing and GeoAI, with an emphasis on leveraging big geospatial data and artificial intelligence to study environmental change, particularly surface water and wetland inundation dynamics.
+
+He is the creator and maintainer of several widely used open-source Python packages, including [geemap](https://geemap.org) for interactive Google Earth Engine visualization, [leafmap](https://leafmap.org) for versatile geospatial mapping, [segment-geospatial](https://samgeo.gishub.org) for applying the Segment Anything Model to geospatial data, and [geoai](https://opengeoai.org) for high-level GeoAI workflows. His open-source projects, available through the [Open Geospatial Solutions](https://github.com/opengeos) organization on GitHub, have been widely adopted by researchers, educators, and practitioners worldwide.
+
+Dr. Wu's work bridges remote sensing, Earth observation, and artificial intelligence to make large-scale geospatial data more accessible, reproducible, and intelligent. He is passionate about open science and believes that the best tools for understanding our planet should be freely available to everyone.
+
+## Licensing and Copyright
+
+This book embraces the principles of open science and open education. To support transparency, learning, and reuse, the **code examples** in this book are released under a [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) license. This means you are free to copy, modify, and distribute the code, even for commercial purposes, as long as appropriate credit is given.
+
+Please attribute code usage by citing the book or linking to the GitHub repository:
+
+Wu, Q. (2026). *GeoAI with Python: A Practical Guide to Open-Source Geospatial AI*. Independently published. PDF edition ISBN 979-8993859729; Print edition ISBN 979-8253507414. Available at [book.opengeoai.org](https://book.opengeoai.org).
+
+While the code is freely available, the **text, figures, and images** in this book are **copyrighted** © 2026 by the author and may not be reproduced, redistributed, or modified without explicit permission. This includes all written content, custom diagrams, and embedded visualizations unless otherwise noted.
+
+If you wish to reuse or adapt any non-code material from the book (for example, for teaching, presentations, or publications), please contact the author to request permission.
+
+This dual licensing approach helps balance open access to learning materials with the protection of original creative work. Thank you for respecting these terms and supporting the open-source geospatial community.
