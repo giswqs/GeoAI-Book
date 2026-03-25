@@ -6,7 +6,7 @@ Welcome to the official repository for _**GeoAI with Python: A Practical Guide t
 
 ## Get the Book
 
-- 🇺🇸 **Full-Color Print Edition (423 pages):** Coming soon
+- 🇺🇸 **Full-Color Print Edition (430 pages):** Available on Amazon ([link](https://www.amazon.com/dp/B0GTVFY3PQ))
 
 - 🇺🇸 **English PDF Edition (423 pages):** Available on Leanpub ([link](https://leanpub.com/geoai))
 
