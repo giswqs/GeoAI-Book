@@ -29,7 +29,7 @@ Welcome to the official repository for _**GeoAI with Python: A Practical Guide t
 - 🇷🇺 **Russian PDF/EPUB Edition (473 pages):** Российская версия на Leanpub доступна ([link](https://leanpub.com/geoai-ru))
 
 - 🇮🇹 **Italian PDF/EPUB Edition (451 pages):** Edizione italiana disponibile su Leanpub ([link](https://leanpub.com/geoai-it))
-  
+
 ## Cite the Book
 
 If you use this book in your research or teaching, please consider citing it as follows:
