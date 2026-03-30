@@ -8,15 +8,27 @@ Welcome to the official repository for _**GeoAI with Python: A Practical Guide t
 
 - 🇺🇸 **Full-Color Print Edition (430 pages):** Available on Amazon ([link](https://www.amazon.com/dp/B0GTVFY3PQ))
 
-- 🇺🇸 **English PDF Edition (423 pages):** Available on Leanpub ([link](https://leanpub.com/geoai))
+- 🇺🇸 **English PDF/EPUB Edition (423 pages):** Available on Leanpub ([link](https://leanpub.com/geoai))
 
-- 🇲🇽 **Spanish PDF Edition (455 pages):** Edición en español disponible en Leanpub ([link](https://leanpub.com/geoai-es))
+- 🇲🇽 **Spanish PDF/EPUB Edition (455 pages):** Edición en español disponible en Leanpub ([link](https://leanpub.com/geoai-es))
 
-- 🇨🇳 **Chinese PDF Edition (415 pages):** 中文电子版可在 Leanpub 购买 ([link](https://leanpub.com/geoai-zh))
+- 🇨🇳 **Chinese PDF/EPUB Edition (415 pages):** 中文电子版可在 Leanpub 购买 ([link](https://leanpub.com/geoai-zh))
 
-- 🇫🇷 **French PDF Edition (461 pages):** Edition en français disponible en Leanpub ([link](https://leanpub.com/geoai-fr))
+- 🇫🇷 **French PDF/EPUB Edition (461 pages):** Edition en français disponible en Leanpub ([link](https://leanpub.com/geoai-fr))
 
-- 🇩🇪 **German PDF Edition (461 pages):** Edition in Deutsch verfügbar auf Leanpub ([link](https://leanpub.com/geoai-de))
+- 🇩🇪 **German PDF/EPUB Edition (461 pages):** Edition in Deutsch verfügbar auf Leanpub ([link](https://leanpub.com/geoai-de))
+
+- 🇯🇵 **Japanese PDF/EPUB Edition (451 pages):** 日本語版が Leanpub で利用可能 ([link](https://leanpub.com/geoai-ja))
+
+- 🇰🇷 **Korean PDF/EPUB Edition (427 pages):** 한국어판 Leanpub에서 이용 가능 ([link](https://leanpub.com/geoai-ko))
+
+- 🇮🇩 **Indonesian PDF/EPUB Edition (445 pages):** Edisi bahasa Indonesia tersedia di Leanpub ([link](https://leanpub.com/geoai-id))
+
+- 🇵🇹 **Portuguese PDF/EPUB Edition (449 pages):** Edição em português disponível na Leanpub ([link](https://leanpub.com/geoai-pt))
+
+- 🇷🇺 **Russian PDF/EPUB Edition (473 pages):** Российская версия на Leanpub доступна ([link](https://leanpub.com/geoai-ru))
+
+- 🇮🇹 **Italian PDF/EPUB Edition (451 pages):** Edizione italiana disponibile su Leanpub ([link](https://leanpub.com/geoai-it))
 
 ## Cite the Book
 
