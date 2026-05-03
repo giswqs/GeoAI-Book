@@ -12,13 +12,13 @@ Welcome to the official repository for _**GeoAI with Python: A Practical Guide t
 
 ### PDF and EPUB Editions
 
-🇺🇸 [English](https://opengeopub.com/books/geoai) | 🇲🇽 [Spanish](https://opengeopub.com/books/geoai-es) | 🇨🇳 [Chinese](https://opengeopub.com/books/geoai-zh) | 🇫🇷 [French](https://opengeopub.com/books/geoai-fr) | 🇩🇪 [German](https://opengeopub.com/books/geoai-de) | 🇯🇵 [Japanese](https://opengeopub.com/books/geoai-ja) | 🇰🇷 [Korean](https://opengeopub.com/books/geoai-ko) | 🇮🇩 [Indonesian](https://opengeopub.com/books/geoai-id) | 🇵🇹 [Portuguese](https://opengeopub.com/books/geoai-pt) | 🇷🇺 [Russian](https://opengeopub.com/books/geoai-ru) | 🇮🇹 [Italian](https://opengeopub.com/books/geoai-it)
+🇺🇸 [English](https://opengeopub.com/books/geoai) | 🇨🇳 [Chinese](https://opengeopub.com/books/geoai-zh) | 🇨🇿 [Czech](https://opengeopub.com/books/geoai-cs) | 🇫🇷 [French](https://opengeopub.com/books/geoai-fr) | 🇩🇪 [German](https://opengeopub.com/books/geoai-de) | 🇮🇩 [Indonesian](https://opengeopub.com/books/geoai-id) | 🇮🇹 [Italian](https://opengeopub.com/books/geoai-it) | 🇯🇵 [Japanese](https://opengeopub.com/books/geoai-ja) | 🇰🇷 [Korean](https://opengeopub.com/books/geoai-ko) | 🇵🇹 [Portuguese](https://opengeopub.com/books/geoai-pt) | 🇷🇺 [Russian](https://opengeopub.com/books/geoai-ru) | 🇲🇽 [Spanish](https://opengeopub.com/books/geoai-es)
 
 ## Cite the Book
 
 If you use this book in your research or teaching, please consider citing it as follows:
 
-> Wu, Q. (2026). *GeoAI with Python: A Practical Guide to Open-Source Geospatial AI*. Independently published. PDF edition ISBN 979-8993859729; Print edition ISBN 979-8253507414. Available at [book.opengeoai.org](https://book.opengeoai.org).
+> Wu, Q. (2026). _GeoAI with Python: A Practical Guide to Open-Source Geospatial AI_. Independently published. PDF edition ISBN 979-8993859729; Print edition ISBN 979-8253507414. Available at [book.opengeoai.org](https://book.opengeoai.org).
 
 ![](https://books.gishub.org/geoai/front-cover.webp)
 
@@ -44,8 +44,6 @@ Learn to apply deep learning and AI to satellite imagery, aerial photos, and geo
 **Who it’s for**
 
 GIS professionals, remote sensing scientists, data scientists, and students who want to apply AI to geospatial data using Python and open-source tools.
-
-
 
 ## Table of Contents
 
@@ -91,7 +89,6 @@ GIS professionals, remote sensing scientists, data scientists, and students who 
 22. [Semantic Segmentation in QGIS](book/qgis/semantic-segmentation.md)
 23. [Instance Segmentation in QGIS](book/qgis/instance-segmentation.md)
 
-
 ## About the Author
 
 Dr. Qiusheng Wu is an Associate Professor and the Director of Graduate Studies in the Department of Geography & Sustainability at the University of Tennessee, Knoxville. He also serves as an Amazon Scholar. Dr. Wu's research focuses on advancing open-source geospatial analytics through cloud computing and GeoAI, with an emphasis on leveraging big geospatial data and artificial intelligence to study environmental change, particularly surface water and wetland inundation dynamics.
@@ -106,7 +103,7 @@ This book embraces the principles of open science and open education. To support
 
 Please attribute code usage by citing the book or linking to the GitHub repository:
 
-Wu, Q. (2026). *GeoAI with Python: A Practical Guide to Open-Source Geospatial AI*. Independently published. PDF edition ISBN 979-8993859729; Print edition ISBN 979-8253507414. Available at [book.opengeoai.org](https://book.opengeoai.org).
+Wu, Q. (2026). _GeoAI with Python: A Practical Guide to Open-Source Geospatial AI_. Independently published. PDF edition ISBN 979-8993859729; Print edition ISBN 979-8253507414. Available at [book.opengeoai.org](https://book.opengeoai.org).
 
 While the code is freely available, the **text, figures, and images** in this book are **copyrighted** © 2026 by the author and may not be reproduced, redistributed, or modified without explicit permission. This includes all written content, custom diagrams, and embedded visualizations unless otherwise noted.
 
