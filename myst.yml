@@ -20,9 +20,7 @@ project:
     - book/references.bib
   toc:
     - file: index.md
-    - title: Preface
-      children:
-        - file: book/preface.md
+    - file: book/preface.md
     - title: Foundations
       children:
         - file: book/foundations/introduction.md
