@@ -3,19 +3,19 @@ project:
   title: GeoAI with Python
   authors:
     - name: Qiusheng Wu
-  copyright: '2026'
+  copyright: "2026"
   exclude:
     - _build
     - Thumbs.db
     - .DS_Store
-    - '**.ipynb_checkpoints'
+    - "**.ipynb_checkpoints"
   github: giswqs/GeoAI-Book
-  thebe:
-    binder:
-      repo: giswqs/GeoAI-Book
-      provider: github
-      url: https://mybinder.org
-      ref: main
+  # thebe:
+  #   binder:
+  #     repo: giswqs/GeoAI-Book
+  #     provider: github
+  #     url: https://mybinder.org
+  #     ref: main
   bibliography:
     - book/references.bib
   toc:
@@ -63,4 +63,4 @@ site:
     analytics_google: G-MF4L14E6BP
   template: book-theme
   parts:
-    primary_sidebar_footer: ''
+    primary_sidebar_footer: ""

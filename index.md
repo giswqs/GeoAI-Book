@@ -1,5 +1,10 @@
 # GeoAI with Python
 
+[![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/giswqs/GeoAI-Book/blob/main)
+[![image](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/giswqs/GeoAI-Book/HEAD)
+[![Amazon](https://img.shields.io/badge/Buy%20on-Amazon-orange?logo=amazon&logoColor=white)](https://www.amazon.com/dp/B0GTVFY3PQ)
+[![YouTube](https://img.shields.io/badge/Watch-Video-red?logo=youtube&logoColor=white)](https://www.youtube.com/@giswqs)
+
 ## Introduction
 
 Welcome to the official repository for _**GeoAI with Python: A Practical Guide to Open-Source Geospatial AI**_. This repository contains all the code examples featured in the book, designed to help you learn and apply GeoAI using open-source tools.
