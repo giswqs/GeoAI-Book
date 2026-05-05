@@ -10,6 +10,10 @@ kernelspec:
   language: python
   name: python3
 ---
+
+[![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/giswqs/GeoAI-Book/blob/main/book/data/training-data.ipynb)
+[![image](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/giswqs/GeoAI-Book/main?urlpath=lab/tree/book/data/training-data.ipynb)
+
 # Creating Training Data
 
 ## Introduction

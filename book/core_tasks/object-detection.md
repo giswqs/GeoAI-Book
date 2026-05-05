@@ -10,6 +10,10 @@ kernelspec:
   language: python
   name: python3
 ---
+
+[![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/giswqs/GeoAI-Book/blob/main/book/core_tasks/object-detection.ipynb)
+[![image](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/giswqs/GeoAI-Book/main?urlpath=lab/tree/book/core_tasks/object-detection.ipynb)
+
 # Object Detection
 
 ## Introduction
