@@ -12,7 +12,7 @@ Welcome to the official repository for _**GeoAI with Python: A Practical Guide t
 
 ### PDF and EPUB Editions
 
-🇺🇸 [English](https://opengeopub.com/books/geoai) | 🇨🇳 [Chinese](https://opengeopub.com/books/geoai-zh) | 🇨🇿 [Czech](https://opengeopub.com/books/geoai-cs) | 🇫🇷 [French](https://opengeopub.com/books/geoai-fr) | 🇩🇪 [German](https://opengeopub.com/books/geoai-de) | 🇮🇩 [Indonesian](https://opengeopub.com/books/geoai-id) | 🇮🇹 [Italian](https://opengeopub.com/books/geoai-it) | 🇯🇵 [Japanese](https://opengeopub.com/books/geoai-ja) | 🇰🇷 [Korean](https://opengeopub.com/books/geoai-ko) | 🇵🇹 [Portuguese](https://opengeopub.com/books/geoai-pt) | 🇷🇺 [Russian](https://opengeopub.com/books/geoai-ru) | 🇲🇽 [Spanish](https://opengeopub.com/books/geoai-es)
+🇺🇸 [English](https://opengeopub.com/books/geoai) | 🇨🇳 [Chinese](https://opengeopub.com/books/geoai-zh) | 🇨🇿 [Czech](https://opengeopub.com/books/geoai-cs) | 🇳🇱 [Dutch](https://opengeopub.com/books/geoai-nl) | 🇫🇷 [French](https://opengeopub.com/books/geoai-fr) | 🇩🇪 [German](https://opengeopub.com/books/geoai-de) | 🇮🇳 [Hindi](https://opengeopub.com/books/geoai-hi) | 🇮🇩 [Indonesian](https://opengeopub.com/books/geoai-id) | 🇮🇹 [Italian](https://opengeopub.com/books/geoai-it) | 🇯🇵 [Japanese](https://opengeopub.com/books/geoai-ja) | 🇰🇷 [Korean](https://opengeopub.com/books/geoai-ko) | 🇵🇹 [Portuguese](https://opengeopub.com/books/geoai-pt) | 🇷🇺 [Russian](https://opengeopub.com/books/geoai-ru) | 🇲🇽 [Spanish](https://opengeopub.com/books/geoai-es) | 🇹🇷 [Turkish](https://opengeopub.com/books/geoai-tr)
 
 ## Cite the Book
 
